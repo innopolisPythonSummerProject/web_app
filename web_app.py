@@ -1,6 +1,7 @@
 from browser import document, html, window, ajax
 import random
 import json
+# import asyncio
 
 #main doby
 main = html.DIV(id="main")
@@ -126,33 +127,62 @@ def handle_picture_generate_button_click(event):
     
 def picture_loading_only(event):
 
-    def handle_image_load(event):
-        # Remove the loading text when the image is successfully loaded
-        loading_text.remove()
-        send_checkbox_state()
-        # get the picture
-        container <= image
-        new_button.disabled = False
+    def handle_image_load(payload):
+        # send_checkbox_state()
+        
+        
+        # Make an HTTP GET request using ajax.ajax()
+        req = ajax.ajax()
+        req.bind("complete", lambda req: process_response(req, payload))
+
+
+        def handle_image_error(event):
+            # when the image fails to load
+            status_code = event.target.status  # Get the HTTP status code
+            error_message = status_code  # Function to get error message based on status code
+            loading_text.text = f"Failed: {error_message}"
+            new_button.disabled = False
+
+
+        req.bind("error", handle_image_error)
+        req.bind("abort", handle_image_error)
+        req.bind("timeout", handle_image_error)
+
+        req.open("GET", 'https://well-wisher.onrender.com/image?prompt=' + payload["prompt"])
+        req.timeout = 20000
+        req.send()
+        
+    
         
 
+    def process_response(req, payload):
+        
+        # if req.status == 200 or req.status == 0:
+        response_data = req.text
+        response_data = json.loads(response_data)
+        url = response_data["data"][0]["url"]
 
-    def handle_image_error(event):
-        # when the image fails to load
-        loading_text.text = "Failed to load the image"
+        
+        # url = req.responseURL
+                
+        image = html.IMG(src=url, style={"height": "100%"})
+        loading_text.remove()
+        container.clear()
+        container <= image
         new_button.disabled = False
 
+        
+
+    
+    
     new_button.disabled = True 
     container.clear()
     loading_text = html.SPAN("Loading...", id="loadingText", style={"position": "relative", "bottom": "-48%", "opacity":"0.5"})
     container <= loading_text
     
-    # this part should be changed to the real generation, this examples here for usability testing
-    image_sources = ["example.png", "example2.png", "example3.png", "example4.png", "example5.png"]
-    random_image_source = random.choice(image_sources)
-    image = html.IMG(src=random_image_source, style={"width": "100%", "height": "100%"})
-
-    image.bind("load", handle_image_load) 
-    image.bind("error", handle_image_error)
+    payload = {"prompt":"cat"}
+    handle_image_load(payload)
+    
 
 def overlay_off_and_picture_loading(event):
     picture_loading_only(event)
@@ -212,37 +242,80 @@ def handle_text_generate_button_click(event):
     
     text_loading_only(event)
 
-def text_loading_only(event):
+# def text_loading_only(event):
     
+    # def handle_text_error():
+    #     loading_text.text = "Failed to load the text"
+
+    # new_text_button.disabled = True 
+    # text_container.clear()
+    # loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity":"0.5"}) #styling??????
+    # text_container <= loading_text
+    
+    # # some examples for better visual representation in usability test
+    # text_options = [
+    # "Ты лучшая тарелочка в этом чатике!",
+    # "Без тебя математика не математится",
+    # "\^O^/",
+    # ":))))))))))))))))))))))))))"
+    # ]
+
+    # try:
+    #     # here getting the text. not done yet
+    #     random_text = random.choice(text_options) # for usability test
+
+    # except Exception as e:
+    #     handle_text_error()
+    #     raise e 
+    
+    # text = html.SPAN(random_text, id="GeneratedText")
+    # loading_text.remove()
+    # text_container <= text
+    
+    # new_text_button.disabled = False
+
+def text_loading_only(event):
     def handle_text_error():
         loading_text.text = "Failed to load the text"
 
-    new_text_button.disabled = True 
+    new_text_button.disabled = True
     text_container.clear()
-    loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity":"0.5"}) #styling??????
+    loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity": "0.5"})
     text_container <= loading_text
-    
-    # some examples for better visual representation in usability test
-    text_options = [
-    "Ты лучшая тарелочка в этом чатике!",
-    "Без тебя математика не математится",
-    "\^O^/",
-    ":))))))))))))))))))))))))))"
-    ]
 
     try:
-        # here getting the text. not done yet
-        random_text = random.choice(text_options) # for usability test
-    
+        def process_response(req):
+            random_text = req.text  # Retrieve the response text
+            response_data = json.loads(random_text)
+            
+            random_text = response_data["choices"][0]["text"]
+            # url = response_data["data"][0]["url"]
+            text = html.SPAN(random_text, id="GeneratedText")
+            loading_text.remove()
+            text_container <= text
+            new_text_button.disabled = False
+
+        def handle_text_error():
+            loading_text.text = "Failed to load the text"
+            new_text_button.disabled = False
+
+        req = ajax.ajax()
+        req.bind("complete", process_response)
+        req.bind("error", handle_text_error)
+        req.bind("abort", handle_text_error)
+        req.bind("timeout", handle_text_error)
+
+        #get holidays
+        payload = {"holiday": "название праздника"}
+        req.open("GET", 'https://well-wisher.onrender.com/greeting?holiday=' + payload["holiday"])
+        req.timeout = 20000
+        req.send()
+
     except Exception as e:
         handle_text_error()
-        raise e 
-    
-    text = html.SPAN(random_text, id="GeneratedText")
-    loading_text.remove()
-    text_container <= text
-    
-    new_text_button.disabled = False
+        raise e
+
+
 
 def overlay_off_and_text_loading(event):
     text_loading_only(event)
