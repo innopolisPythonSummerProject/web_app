@@ -11,6 +11,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 300px;
+    gap: 10px;
 }
 
 
@@ -45,7 +47,8 @@ body{
     flex-direction: column;
     aspect-ratio: 1/1;
     border-radius: 20px;
-    background-color: #f2f0ef;
+    background-color: var(--tg-theme-secondary-bg-color);
+    /* background-color: #f2f0ef; */
     overflow: hidden;
     text-align: center;
     display: flex;
@@ -59,12 +62,13 @@ body{
 
 #firstPictureButton{
     position: relative;
-    bottom: 16px; /*half of the size*/
+    bottom: 26px; /*half of the size + gap 10px*/
 }
 
 
 .NewButton{
-    background-color: #969E74; 
+    background-color: var(--tg-theme-button-color);
+    /* background-color: #969E74;  */
     border: 1px;
     border-radius: 20px;
     width: 110px;
@@ -77,22 +81,28 @@ body{
     transition: box-shadow 0.3s ease; 
 }
 
+#newPictureButton{
+    position: relative;
+    bottom: 32px; /*half of the size + gap 10 px*/
+}
+
 .NewButton:hover{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* change box shadow on hover */
 }
 
 .NewButton:active{
-    background-color: #868d67; 
+    filter: brightness(80%);
+    /* background-color: #868d67;  */
 }
 
 .regeneraring_button{
-    background-color: #969E74; 
+    background-color: var(--tg-theme-button-color);
+    /* position: fixed; */
+    /* background-color: #969E74;  */
     border: 0px;
     border-radius: 50%;
     width: 44px;
     height: 44px;
-    /* position: relative;
-    bottom: 22px; half of the size */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* add box shadow */
     cursor: pointer; /* change cursor to pointer on hover */
     transition: box-shadow 0.3s ease; /* add transition effect to box shadow */
@@ -103,12 +113,8 @@ body{
 }
 
 .regeneraring_button:active{
-    background-color: #868d67; 
-}
-
-#newPictureButton{
-    position: relative;
-    bottom: 22px; /*half of the size*/
+    filter: brightness(80%); 
+    /* background-color: #868d67;  */
 }
 
 .regenerate-svg{
@@ -121,7 +127,7 @@ body{
 }
 
 .regeneraring_button:disabled {
-    background-color: #a0a0a0;
+    background-color: #a0a0a0; /*??????????*/
     /* opacity: 0.9; */
     cursor: not-allowed;
 }
@@ -131,7 +137,7 @@ body{
 }
 
 .regeneraring_button:disabled:active {
-    background-color: #a0a0a0;
+    background-color: #a0a0a0; /*??????????*/
     /* opacity: 0.9; */
     cursor: not-allowed;
 }
@@ -160,7 +166,8 @@ body{
 }
 
 #send_my_wishes_button{
-    background-color: #969E74; 
+    background-color: var(--tg-theme-button-color);
+    /* background-color: #969E74;  */
     /* color: #ffffff; */ /* if would like to make the text white*/
     /* font-weight: lighter; */
     border: 1px;
@@ -183,7 +190,8 @@ body{
 }
 
 #send_my_wishes_button:active{
-    background-color: #868d67; 
+    filter: brightness(80%);
+    /* background-color: #868d67; */
     /* opacity: 0.85; */
 }
 
@@ -198,7 +206,8 @@ body{
     transform: translate(-50%, -50%);
     width: 350px;
     height: 200px;
-    background-color: white;
+    /* background-color: white; */
+    background-color: var(--tg-theme-bg-color);
     /* border: 0px solid #ccc; */
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -219,9 +228,11 @@ body{
 }
 
 #popup-yes{
-    color: #ffffff;
+    color: var(--tg-theme-button-text-color);
+    /* color: #ffffff; */
     font-weight: lighter;
-    background-color: #969E74; 
+    background-color: var(--tg-theme-button-color);
+    /* background-color: #969E74;  */
     border: 0px;
     border-radius: 20px;
     width: 124px;
@@ -234,11 +245,10 @@ body{
 }
 
 #popup-yes:active{
-    background-color: #868d67; 
+    filter: brightness(80%);
+    /* background-color: #868d67;  */
 }
 
-/* #yes_button_div{
-} */
 
 #popup-yes:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* change box shadow on hover */
@@ -256,7 +266,8 @@ body{
 #popup-no {
     width: 24px;
     height: 24px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
+    background-color: var(--tg-theme-bg-color);
     border: 0px;
     border-radius: 50%;
     /* border: 2px solid #a7a7a7; */
@@ -269,7 +280,7 @@ body{
 .close-svg {
     height: 21px;
     width: 21px;
-    border: 0px solid #444444;
+    /* border: 0px solid #444444; ??? */
     position: relative;
     right: 5px;
     bottom: 0px;
@@ -292,8 +303,10 @@ body{
 }
 
 #popup-send-button{
-    background-color: #969E74; 
-    color: #ffffff;
+    background-color: var(--tg-theme-button-color);
+    /* background-color: #969E74;  */
+    color: var(--tg-theme-button-text-color);
+    /* color: #ffffff; */
     font-weight: lighter;
     border: 0px;
     border-radius: 20px;
@@ -309,5 +322,6 @@ body{
 }
 
 #popup-send-button:active{
-    background-color: #868d67; 
+    filter: brightness(80%);
+    /* background-color: #868d67;  */
 }

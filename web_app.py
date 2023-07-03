@@ -38,7 +38,7 @@ label3 <= "User picture"
 second_checkbox_div <= label3
 
 # div for all checkboxes
-all_checkboxes_div = html.DIV(style={"padding-top": "0px", "padding-bottom": "20px", "width": "280px","display":"flex", "flex-direction":"row", "gap": "12px", "justify-content": "space-between"}) #rewrite in %
+all_checkboxes_div = html.DIV(style={"border-radius": "10px","padding-top": "10px", "padding-bottom": "10px", "width": "280px","display":"flex", "flex-direction":"row", "gap": "25%",  "width": "300px"}) #"background-color": "#ffffff", 
 all_checkboxes_div <= first_checkbox_div
 all_checkboxes_div <= second_checkbox_div
 main <= all_checkboxes_div
@@ -241,38 +241,7 @@ def handle_text_generate_button_click(event):
     text_button_clicked = True
     
     text_loading_only(event)
-
-# def text_loading_only(event):
     
-    # def handle_text_error():
-    #     loading_text.text = "Failed to load the text"
-
-    # new_text_button.disabled = True 
-    # text_container.clear()
-    # loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity":"0.5"}) #styling??????
-    # text_container <= loading_text
-    
-    # # some examples for better visual representation in usability test
-    # text_options = [
-    # "Ты лучшая тарелочка в этом чатике!",
-    # "Без тебя математика не математится",
-    # "\^O^/",
-    # ":))))))))))))))))))))))))))"
-    # ]
-
-    # try:
-    #     # here getting the text. not done yet
-    #     random_text = random.choice(text_options) # for usability test
-
-    # except Exception as e:
-    #     handle_text_error()
-    #     raise e 
-    
-    # text = html.SPAN(random_text, id="GeneratedText")
-    # loading_text.remove()
-    # text_container <= text
-    
-    # new_text_button.disabled = False
 
 def text_loading_only(event):
     def handle_text_error():
@@ -403,8 +372,6 @@ def handle_last_yes_click(event):
     # Convert the payload to a JSON string
     payload_json = json.dumps(payload)
     
-    
-
     def handle_request_complete(req):
         # Handle the request completion
         if req.status == 200:
