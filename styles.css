@@ -236,7 +236,7 @@ body{
 #popup-yes{
     color: var(--tg-theme-button-text-color);
     /* color: #ffffff; */
-    font-weight: lighter;
+    /* font-weight: lighter; */
     background-color: var(--tg-theme-button-color);
     /* background-color: #969E74;  */
     border: 0px;
@@ -314,7 +314,7 @@ body{
     /* background-color: #969E74;  */
     color: var(--tg-theme-button-text-color);
     /* color: #ffffff; */
-    font-weight: lighter;
+    /* font-weight: lighter; */
     border: 0px;
     border-radius: 20px;
     width: 80px;
