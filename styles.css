@@ -108,6 +108,9 @@ body{
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* add box shadow */
     cursor: pointer; /* change cursor to pointer on hover */
     transition: box-shadow 0.3s ease; /* add transition effect to box shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .regeneraring_button:hover{
