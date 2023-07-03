@@ -68,6 +68,7 @@ body{
 
 .NewButton{
     background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
     /* background-color: #969E74;  */
     border: 1px;
     border-radius: 20px;
@@ -127,7 +128,8 @@ body{
 }
 
 .regeneraring_button:disabled {
-    background-color: #a0a0a0; /*??????????*/
+    filter: grayscale(100%);
+    /* background-color: #a0a0a0; ?????????? */
     /* opacity: 0.9; */
     cursor: not-allowed;
 }
@@ -137,7 +139,8 @@ body{
 }
 
 .regeneraring_button:disabled:active {
-    background-color: #a0a0a0; /*??????????*/
+    filter: brightness(90%);
+    /* background-color: #a0a0a0;  */
     /* opacity: 0.9; */
     cursor: not-allowed;
 }
@@ -151,8 +154,8 @@ body{
     align-items: center;
     display: flex;
     align-items: center;
-    width: 420px;
-    height: 190px;
+    width: 320px;
+    height: 250px;
     /* border: 1.5px solid #c9c9c9; */
 }
 
