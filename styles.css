@@ -53,6 +53,7 @@ body{
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -119,6 +120,7 @@ body{
 }
 
 .regenerate-svg{
+    fill: var(--tg-theme-button-text-color);
     height: 30px;
     width: 30px;
     color: var(--tg-theme-text-color);
@@ -170,6 +172,7 @@ body{
 
 #send_my_wishes_button{
     background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
     /* background-color: #969E74;  */
     /* color: #ffffff; */ /* if would like to make the text white*/
     /* font-weight: lighter; */
@@ -281,6 +284,7 @@ body{
 }
 
 .close-svg {
+    fill: var(--tg-theme-text-color);
     height: 21px;
     width: 21px;
     /* border: 0px solid #444444; ??? */

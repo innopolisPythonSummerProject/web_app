@@ -48,7 +48,7 @@ main <= all_checkboxes_div
 container = html.DIV(id="picture_container")
 
 loading_text = html.SPAN("Here will be the picture generated for you!", id="loadingText", style={"opacity":"0.5"})
-picture_text_container = html.DIV(id="picture_text_container", style={"position": "relative", "bottom": "-45%", "width":"270px"} )
+picture_text_container = html.DIV(id="picture_text_container")
 picture_text_container <= loading_text
 container <= picture_text_container
 main <= container
@@ -177,7 +177,7 @@ def picture_loading_only(event):
     
     new_button.disabled = True 
     container.clear()
-    loading_text = html.SPAN("Loading...", id="loadingText", style={"position": "relative", "bottom": "-48%", "opacity":"0.5"})
+    loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity":"0.5"})
     container <= loading_text
     
     payload = {"prompt":"cat"}
