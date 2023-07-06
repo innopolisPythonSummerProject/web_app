@@ -384,7 +384,7 @@ def handle_last_yes_click(event):
     
     # Send the data to the backend
     
-    tg.sendData(payload)
+    tg.sendData("hi!")
     document <= 1
     window.close()
     # req = ajax.ajax()
