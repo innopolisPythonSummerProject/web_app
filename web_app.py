@@ -3,9 +3,13 @@ import random
 import json
 # import asyncio
 
+tg = window.Telegram.WebApp
+
+# document <= tg 
+
 #main doby
 main = html.DIV(id="main")
-
+# holiday = document.query['holiday'] or "день рождения"
 
 #Picture part
 # header
@@ -63,9 +67,9 @@ def send_checkbox_state():
     checkbox3_checked = document["UserProfileCheckbox"].checked
 
     checkbox_state = {
-        "KittensCheckbox": checkbox1_checked,
-        "SparklesCheckbox": checkbox2_checked,
-        "UserProfileCheckbox": checkbox3_checked
+        "Kittens": checkbox1_checked,
+        "Sparkles": checkbox2_checked,
+        "UserProfile": checkbox3_checked
     }
         
     checkbox_state_json = json.dumps(checkbox_state)
@@ -148,7 +152,8 @@ def picture_loading_only(event):
         req.bind("abort", handle_image_error)
         req.bind("timeout", handle_image_error)
 
-        req.open("GET", 'https://well-wisher.onrender.com/image?prompt=' + payload["prompt"])
+
+        req.open("GET", f'https://well-wisher.onrender.com/image?prompt={holiday}&kitty={checkbox1_checked}&')
         req.timeout = 20000
         req.send()
         
@@ -379,12 +384,15 @@ def handle_last_yes_click(event):
     
     # Send the data to the backend
     
-    req = ajax.ajax()
-    # req.bind("complete", handle_request_complete) #maybe this version is better
-    req.open("POST", "/my-endpoint") #not done yet
-    req.set_header("Content-Type", "application/json") #not done yet
-    req.send(payload_json)
-    handle_request_complete(req)
+    tg.sendData(payload)
+    document <= 1
+    window.close()
+    # req = ajax.ajax()
+    # # req.bind("complete", handle_request_complete) #maybe this version is better
+    # req.open("POST", "/my-endpoint") #not done yet
+    # req.set_header("Content-Type", "application/json") #not done yet
+    # req.send(payload_json)
+    # handle_request_complete(req)
     
 
 # Function to handle the "No" button click event
