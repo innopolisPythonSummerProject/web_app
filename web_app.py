@@ -389,30 +389,39 @@ def handle_last_yes_click(event):
     # payload_json = json.dumps(payload)
     
 
-    def received_chat_id(chat_id):
-        # Use the chat ID in your code
-        # Display the chat ID on the webpage
-        document <= chat_id
-        chat_id_element = document.getElementById("chatId")
-        chat_id_element.text = chat_id 
+    #GETTING CHAT ID      
+    # def received_chat_id(chat_id):
+    #     # Use the chat ID in your code
+    #     # Display the chat ID on the webpage
+    #     document <= chat_id
+    #     chat_id_element = document.getElementById("chatId")
+    #     chat_id_element.text = chat_id 
 
-    def get_chat_id():
-        js_code = '''
-        document.write("js code started")
-        const chatId = TelegramWebAppProxy.getChatId();
-        window.receivedChatId(chatId);
-        document.write(chatId);
-        document.write("js code ended")
-        '''
-        try:
-            document <= 1
-            window.setTimeout(lambda: window.eval(js_code), 1000)  # Delay execution by 1 second
-        finally:
-            pass 
+    # def get_chat_id():
+    #     js_code = '''
+    #     console.log("js code started")
+    #     const chatId = TelegramWebAppProxy.getChatId();
+    #     window.receivedChatId(chatId);
+    #     console.log(chatId);
+    #     console.log("js code ended")
+    #     '''
+    #     try:
+    #         window.setTimeout(lambda: window.eval(js_code), 1000)  # Delay execution by 1 second
+    #     finally:
+    #         pass 
 
 
-    window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
-    get_chat_id()
+    # window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
+    # get_chat_id()
+
+
+    js_code = '''
+    window.Telegram.WebApp.sendData("hi!");
+    '''
+
+    # Evaluate the JavaScript code using eval
+    document <= 1
+    window.eval(js_code)
     
     # Send the data to the backend
     
