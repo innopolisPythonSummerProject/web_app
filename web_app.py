@@ -415,14 +415,10 @@ def handle_last_yes_click(event):
     # window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
     # get_chat_id()
 
-
-    js_code = '''
-    window.Telegram.WebApp.sendData("hi!");
-    '''
-
     # Evaluate the JavaScript code using eval
-    document <= 1
-    javascript.eval(js_code)
+    document <= "before js"
+    javascript.window.Telegram.WebApp.sendData("hi!")
+    document <= "after js"
     # window.eval(js_code)
     
     # Send the data to the backend
