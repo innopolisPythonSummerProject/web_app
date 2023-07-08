@@ -417,11 +417,14 @@ def handle_last_yes_click(event):
 
     # Evaluate the JavaScript code using eval
     document <= "before js"
-    js_code = """
-    window.Telegram.WebApp.sendData("hi!");
-    """
-
+    js_code = '''
+    console.log("start js");
+    const data = { message: 'Hello', count: 3 };
+    window.Telegram.WebApp.sendData(JSON.stringify(data));
+    console.log("end.js");
+    '''
     window.eval(js_code)
+    
     document <= "after js"
     # window.eval(js_code)
     
