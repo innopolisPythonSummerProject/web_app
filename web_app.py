@@ -1,9 +1,10 @@
 from browser import document, html, window, ajax
 import random
 import json
+# import pyjs
 # import asyncio
 
-tg = window.Telegram.WebApp
+
 
 # document <= tg 
 
@@ -364,29 +365,39 @@ def handle_last_button_click(event):
 
 # actual loading
 def handle_last_yes_click(event):
-    # Get the picture and text
-    picture_src = document["picture_container"].querySelector("img").getAttribute("src")
-    text_content = document.querySelector("#GeneratedText").textContent
-    
-    # Create the payload
-    payload = {
-        "picture_src": picture_src,
-        "text_content": text_content
-    }
-    
-    # Convert the payload to a JSON string
-    payload_json = json.dumps(payload)
-    
+
     def handle_request_complete(req):
         # Handle the request completion
         if req.status == 200:
             window.close()
     
+    # Get the picture and text
+    # picture_src = document["picture_container"].querySelector("img").getAttribute("src")
+    # text_content = document.querySelector("#GeneratedText").textContent
+    # Create the payload
+    # payload = {
+    #     "picture_src": picture_src,
+    #     "text_content": text_content
+    # }
+    
+    # Convert the payload to a JSON string
+    # payload_json = json.dumps(payload)
+    
+
+    
+    
     # Send the data to the backend
     
-    tg.sendData("hi!")
+    document <= 0
+    js_code = """
+    tg = window.Telegram.WebApp;
+    tg.sendData("hi!");
+    """
+    pyjs.evaljs(js_code)
     document <= 1
     window.close()
+
+
     # req = ajax.ajax()
     # # req.bind("complete", handle_request_complete) #maybe this version is better
     # req.open("POST", "/my-endpoint") #not done yet
