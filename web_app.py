@@ -1,22 +1,12 @@
 from browser import document, html, window, ajax
 import random
 import json
-import javascript
+# import javascript
 
-# import asyncio
-
-
-
-# document <= tg 
 
 #main doby
 main = html.DIV(id="main")
 # holiday = document.query['holiday'] or "день рождения"
-
-
-
-
-
 
 #Picture part
 # header
@@ -25,33 +15,35 @@ picture_title_container <= html.H3("Generate your picture:")
 main <= picture_title_container
 
 # Kittens checkbox
-first_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, Class="checkboxes", id="checkbox_first_div")
+# first_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, Class="checkboxes", id="checkbox_first_div")
 label = html.LABEL()
 checkbox1 = html.INPUT(type="checkbox", id="KittensCheckbox")
 label_text = "Kittens"
 label <= checkbox1
 label <= label_text
-first_checkbox_div <= label
+# first_checkbox_div <= label
 
 # Sparkles checkbox
 checkbox2 = html.INPUT(type="checkbox", name="myCheckbox", id="SparklesCheckbox")
 label2 = html.LABEL()
 label2 <= checkbox2
 label2 <= "Sparkles"
-first_checkbox_div <= label2
+# first_checkbox_div <= label2
 
 # User profile checkbox
-second_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, id="checkbox2", Class="checkboxes")
-checkbox3 = html.INPUT(type="checkbox", name="myCheckbox", id="UserProfileCheckbox")
-label3 = html.LABEL()
-label3 <= checkbox3
-label3 <= "User picture"
-second_checkbox_div <= label3
+# second_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, id="checkbox2", Class="checkboxes")
+# checkbox3 = html.INPUT(type="checkbox", name="myCheckbox", id="UserProfileCheckbox")
+# label3 = html.LABEL()
+# label3 <= checkbox3
+# label3 <= "User picture"
+# second_checkbox_div <= label3
 
 # div for all checkboxes
-all_checkboxes_div = html.DIV(style={"border-radius": "10px","padding-top": "10px", "padding-bottom": "10px", "width": "280px","display":"flex", "flex-direction":"row", "gap": "25%",  "width": "300px"}) #"background-color": "#ffffff", 
-all_checkboxes_div <= first_checkbox_div
-all_checkboxes_div <= second_checkbox_div
+all_checkboxes_div = html.DIV(Class="checkboxes", style={"border-radius": "10px","padding-top": "10px", "padding-bottom": "10px", "width": "280px","display":"flex", "flex-direction":"row", "gap": "25%",  "width": "300px"}) #"background-color": "#ffffff", 
+all_checkboxes_div <= label
+all_checkboxes_div <= label2
+# all_checkboxes_div <= first_checkbox_div
+# all_checkboxes_div <= second_checkbox_div
 main <= all_checkboxes_div
 
 
@@ -68,33 +60,33 @@ main <= container
 ''' The functionality of picture "Generate!" and Regenerate buttons. '''
 
 # Function to retrieve the checked state of checkboxes and send JSON data to the backend
-def send_checkbox_state():
-    checkbox1_checked = document["KittensCheckbox"].checked
-    checkbox2_checked = document["SparklesCheckbox"].checked
-    checkbox3_checked = document["UserProfileCheckbox"].checked
+# def send_checkbox_state():
+    # checkbox1_checked = document["KittensCheckbox"].checked
+    # checkbox2_checked = document["SparklesCheckbox"].checked
+    # checkbox3_checked = document["UserProfileCheckbox"].checked
 
-    checkbox_state = {
-        "Kittens": checkbox1_checked,
-        "Sparkles": checkbox2_checked,
-        "UserProfile": checkbox3_checked
-    }
+    # checkbox_state = {
+    #     "Kittens": checkbox1_checked,
+    #     "Sparkles": checkbox2_checked,  
+    # }
+    # "UserProfile": checkbox3_checked
         
-    checkbox_state_json = json.dumps(checkbox_state)
+    # checkbox_state_json = json.dumps(checkbox_state)
     
-    req = ajax.ajax()
-    req.open("POST", "https://example.com/checkboxes", True) # change
-    req.set_header("Content-Type", "application/json") # change??
-    req.send(checkbox_state_json)
+    # req = ajax.ajax()
+    # req.open("POST", "https://example.com/checkboxes", True) # change
+    # req.set_header("Content-Type", "application/json") # change??
+    # req.send(checkbox_state_json)
     
-    def handle_response():
-        if req.status == 200:
-            # do we need it
-            print("Checkbox state sent successfully")
-        else:
-            # and this one 
-            print("Error sending checkbox state:", req.text)
+    # def handle_response():
+    #     if req.status == 200:
+    #         # do we need it
+    #         print("Checkbox state sent successfully")
+    #     else:
+    #         # and this one 
+    #         print("Error sending checkbox state:", req.text)
     
-    req.bind("complete", handle_response)
+    # req.bind("complete", handle_response)
 
 # the poup window openning
 def popup_new_generation(event):
@@ -139,8 +131,6 @@ def handle_picture_generate_button_click(event):
 def picture_loading_only(event):
 
     def handle_image_load(payload):
-        # send_checkbox_state()
-        
         
         # Make an HTTP GET request using ajax.ajax()
         req = ajax.ajax()
@@ -158,9 +148,12 @@ def picture_loading_only(event):
         req.bind("error", handle_image_error)
         req.bind("abort", handle_image_error)
         req.bind("timeout", handle_image_error)
+        
+        checkbox1_checked = document["KittensCheckbox"].checked
+        checkbox2_checked = document["SparklesCheckbox"].checked
 
 
-        req.open("GET", f'https://well-wisher.onrender.com/image?prompt={holiday}&kitty={checkbox1_checked}&')
+        req.open("GET", f'https://well-wisher.onrender.com/image?prompt={holiday}&kitty={checkbox1_checked}&Sparkles={checkbox2_checked}')
         req.timeout = 20000
         req.send()
         
@@ -342,7 +335,7 @@ def handle_last_button_click(event):
     popup_window = html.DIV(Class="popup-window", id="popup_window_id")
     popup_content = html.DIV(Class="popup-content")
     popup_text_1 = html.SPAN("Are you sure?", style={"font-weight": "bolder", "border": "0px solid #000000"})
-    popup_text_2 = html.SPAN("You only have one try this year", style={"font-size":"14px", "border": "0px solid #000000"})
+    popup_text_2 = html.SPAN("The window will be closed", style={"font-size":"14px", "border": "0px solid #000000"})
 
 
     popup_close_button = html.DIV(id="close_button_div")
@@ -418,8 +411,8 @@ def handle_last_yes_click(event):
     # Evaluate the JavaScript code using eval
     document <= "before js"
     js_code = '''
-    console.log("start js");
     const data = { message: 'Hello', count: 3 };
+    console.log(dJSON.stringify(data));
     window.Telegram.WebApp.sendData(JSON.stringify(data));
     window.Telegram.WebApp.close();
     console.log("end.js");
