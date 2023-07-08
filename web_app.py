@@ -2,7 +2,7 @@ from browser import document, html, window, ajax
 import random
 import json
 import javascript
-# import pyjs
+
 # import asyncio
 
 
@@ -417,7 +417,11 @@ def handle_last_yes_click(event):
 
     # Evaluate the JavaScript code using eval
     document <= "before js"
-    javascript.window.Telegram.WebApp.sendData("hi!")
+    js_code = """
+    window.Telegram.WebApp.sendData("hi!");
+    """
+
+    window.eval(js_code)
     document <= "after js"
     # window.eval(js_code)
     
