@@ -15,20 +15,7 @@ main = html.DIV(id="main")
 
 
 
-def received_chat_id(chat_id):
-    # Use the chat ID in your code
-    # Display the chat ID on the webpage
-    document <= chat_id
 
-def get_chat_id():
-    js_code = """
-    const chatId = TelegramWebAppProxy.getChatId();
-    window.receivedChatId(chatId);
-    """
-    window.eval(js_code)
-
-window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
-get_chat_id()
 
 #Picture part
 # header
@@ -402,7 +389,25 @@ def handle_last_yes_click(event):
     # payload_json = json.dumps(payload)
     
 
-    
+    def received_chat_id(chat_id):
+        # Use the chat ID in your code
+        # Display the chat ID on the webpage
+        document <= chat_id
+
+    def get_chat_id():
+        js_code = '''
+        const chatId = TelegramWebAppProxy.getChatId();
+        window.receivedChatId(chatId);
+        document.write(chatId);
+        '''
+        try:
+            window.setTimeout(lambda: window.eval(js_code), 1000)  # Delay execution by 1 second
+        finally:
+            pass 
+
+
+    window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
+    get_chat_id()
     
     # Send the data to the backend
     
