@@ -12,6 +12,24 @@ import json
 main = html.DIV(id="main")
 # holiday = document.query['holiday'] or "день рождения"
 
+
+
+
+def received_chat_id(chat_id):
+    # Use the chat ID in your code
+    # Display the chat ID on the webpage
+    document <= chat_id
+
+def get_chat_id():
+    js_code = """
+    const chatId = TelegramWebAppProxy.getChatId();
+    window.receivedChatId(chatId);
+    """
+    window.eval(js_code)
+
+window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
+get_chat_id()
+
 #Picture part
 # header
 picture_title_container = html.DIV(Class="headers", id="firstHeader")
@@ -388,14 +406,13 @@ def handle_last_yes_click(event):
     
     # Send the data to the backend
     
-    document <= 0
-    js_code = """
-    tg = window.Telegram.WebApp;
-    tg.sendData("hi!");
-    """
-    pyjs.evaljs(js_code)
-    document <= 1
-    window.close()
+    
+    # js_code = """
+    # tg = window.Telegram.WebApp;
+    # tg.sendData("hi!");
+    # """
+    # pyjs.evaljs(js_code)
+    # window.close()
 
 
     # req = ajax.ajax()
