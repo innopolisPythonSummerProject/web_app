@@ -1,6 +1,7 @@
 from browser import document, html, window, ajax
 import random
 import json
+import javascript
 # import pyjs
 # import asyncio
 
@@ -421,7 +422,8 @@ def handle_last_yes_click(event):
 
     # Evaluate the JavaScript code using eval
     document <= 1
-    window.eval(js_code)
+    javascript.eval(js_code)
+    # window.eval(js_code)
     
     # Send the data to the backend
     
