@@ -421,6 +421,7 @@ def handle_last_yes_click(event):
     console.log("start js");
     const data = { message: 'Hello', count: 3 };
     window.Telegram.WebApp.sendData(JSON.stringify(data));
+    window.Telegram.WebApp.close();
     console.log("end.js");
     '''
     window.eval(js_code)
