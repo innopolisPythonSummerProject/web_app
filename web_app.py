@@ -6,7 +6,7 @@ import json
 
 #main doby
 main = html.DIV(id="main")
-# holiday = document.query['holiday'] or "день рождения"
+holiday = "birthday"
 
 #Picture part
 # header
