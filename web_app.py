@@ -1,12 +1,12 @@
 from browser import document, html, window, ajax
 import random
 import json
-# import javascript
-
 
 #main doby
 main = html.DIV(id="main")
 holiday = "birthday"
+url = "error"
+text = "error"
 
 #Picture part
 # header
@@ -15,35 +15,26 @@ picture_title_container <= html.H3("Generate your picture:")
 main <= picture_title_container
 
 # Kittens checkbox
-# first_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, Class="checkboxes", id="checkbox_first_div")
+
 label = html.LABEL()
 checkbox1 = html.INPUT(type="checkbox", id="KittensCheckbox")
 label_text = "Kittens"
 label <= checkbox1
 label <= label_text
-# first_checkbox_div <= label
+
 
 # Sparkles checkbox
 checkbox2 = html.INPUT(type="checkbox", name="myCheckbox", id="SparklesCheckbox")
 label2 = html.LABEL()
 label2 <= checkbox2
 label2 <= "Sparkles"
-# first_checkbox_div <= label2
 
-# User profile checkbox
-# second_checkbox_div = html.DIV(style={"display":"flex", "flex-direction":"column"}, id="checkbox2", Class="checkboxes")
-# checkbox3 = html.INPUT(type="checkbox", name="myCheckbox", id="UserProfileCheckbox")
-# label3 = html.LABEL()
-# label3 <= checkbox3
-# label3 <= "User picture"
-# second_checkbox_div <= label3
+
 
 # div for all checkboxes
 all_checkboxes_div = html.DIV(Class="checkboxes", style={"border-radius": "10px","padding-top": "10px", "padding-bottom": "10px", "width": "280px","display":"flex", "flex-direction":"row", "gap": "25%",  "width": "300px"}) #"background-color": "#ffffff", 
 all_checkboxes_div <= label
 all_checkboxes_div <= label2
-# all_checkboxes_div <= first_checkbox_div
-# all_checkboxes_div <= second_checkbox_div
 main <= all_checkboxes_div
 
 
@@ -56,37 +47,6 @@ picture_text_container <= loading_text
 container <= picture_text_container
 main <= container
 
-
-''' The functionality of picture "Generate!" and Regenerate buttons. '''
-
-# Function to retrieve the checked state of checkboxes and send JSON data to the backend
-# def send_checkbox_state():
-    # checkbox1_checked = document["KittensCheckbox"].checked
-    # checkbox2_checked = document["SparklesCheckbox"].checked
-    # checkbox3_checked = document["UserProfileCheckbox"].checked
-
-    # checkbox_state = {
-    #     "Kittens": checkbox1_checked,
-    #     "Sparkles": checkbox2_checked,  
-    # }
-    # "UserProfile": checkbox3_checked
-        
-    # checkbox_state_json = json.dumps(checkbox_state)
-    
-    # req = ajax.ajax()
-    # req.open("POST", "https://example.com/checkboxes", True) # change
-    # req.set_header("Content-Type", "application/json") # change??
-    # req.send(checkbox_state_json)
-    
-    # def handle_response():
-    #     if req.status == 200:
-    #         # do we need it
-    #         print("Checkbox state sent successfully")
-    #     else:
-    #         # and this one 
-    #         print("Error sending checkbox state:", req.text)
-    
-    # req.bind("complete", handle_response)
 
 # the poup window openning
 def popup_new_generation(event):
@@ -157,18 +117,15 @@ def picture_loading_only(event):
         req.timeout = 20000
         req.send()
         
-    
-        
 
     def process_response(req, payload):
+        global url
         
-        # if req.status == 200 or req.status == 0:
         response_data = req.text
         response_data = json.loads(response_data)
         url = response_data["data"][0]["url"]
 
         
-        # url = req.responseURL
                 
         image = html.IMG(src=url, style={"height": "100%"})
         loading_text.remove()
@@ -176,9 +133,6 @@ def picture_loading_only(event):
         container <= image
         new_button.disabled = False
 
-        
-
-    
     
     new_button.disabled = True 
     container.clear()
@@ -259,11 +213,11 @@ def text_loading_only(event):
 
     try:
         def process_response(req):
+            global text
             random_text = req.text  # Retrieve the response text
             response_data = json.loads(random_text)
             
             random_text = response_data["choices"][0]["text"]
-            # url = response_data["data"][0]["url"]
             text = html.SPAN(random_text, id="GeneratedText")
             loading_text.remove()
             text_container <= text
@@ -281,7 +235,7 @@ def text_loading_only(event):
 
         #get holidays
         payload = {"holiday": "название праздника"}
-        req.open("GET", 'https://well-wisher.onrender.com/greeting?holiday=' + payload["holiday"])
+        req.open("GET", f'https://well-wisher.onrender.com/greeting?holiday={holiday}')
         req.timeout = 20000
         req.send()
 
@@ -364,82 +318,31 @@ def handle_last_button_click(event):
 
 # actual loading
 def handle_last_yes_click(event):
+    global text, url
 
     def handle_request_complete(req):
         # Handle the request completion
         if req.status == 200:
             window.close()
     
-    # Get the picture and text
-    # picture_src = document["picture_container"].querySelector("img").getAttribute("src")
-    # text_content = document.querySelector("#GeneratedText").textContent
-    # Create the payload
-    # payload = {
-    #     "picture_src": picture_src,
-    #     "text_content": text_content
-    # }
+
+    payload = {
+        "picture_src": url,
+        "text_content": text
+    }
     
     # Convert the payload to a JSON string
-    # payload_json = json.dumps(payload)
+    payload_json = json.dumps(payload)
     
 
-    #GETTING CHAT ID      
-    # def received_chat_id(chat_id):
-    #     # Use the chat ID in your code
-    #     # Display the chat ID on the webpage
-    #     document <= chat_id
-    #     chat_id_element = document.getElementById("chatId")
-    #     chat_id_element.text = chat_id 
-
-    # def get_chat_id():
-    #     js_code = '''
-    #     console.log("js code started")
-    #     const chatId = TelegramWebAppProxy.getChatId();
-    #     window.receivedChatId(chatId);
-    #     console.log(chatId);
-    #     console.log("js code ended")
-    #     '''
-    #     try:
-    #         window.setTimeout(lambda: window.eval(js_code), 1000)  # Delay execution by 1 second
-    #     finally:
-    #         pass 
-
-
-    # window.receivedChatId = lambda chat_id: received_chat_id(chat_id)
-    # get_chat_id()
-
-    # Evaluate the JavaScript code using eval
-    document <= "before js"
-    js_code = '''
-    const data = { message: 'Hello', count: 3 };
-    console.log(dJSON.stringify(data));
-    window.Telegram.WebApp.sendData(JSON.stringify(data));
-    window.Telegram.WebApp.close();
+    js_code = f'''
+    console.log("start js");
+    window.Telegram.WebApp.sendData("{payload_json}");
     console.log("end.js");
+    window.Telegram.WebApp.close();
     '''
     window.eval(js_code)
-    
-    document <= "after js"
-    # window.eval(js_code)
-    
-    # Send the data to the backend
-    
-    
-    # js_code = """
-    # tg = window.Telegram.WebApp;
-    # tg.sendData("hi!");
-    # """
-    # pyjs.evaljs(js_code)
-    # window.close()
 
-
-    # req = ajax.ajax()
-    # # req.bind("complete", handle_request_complete) #maybe this version is better
-    # req.open("POST", "/my-endpoint") #not done yet
-    # req.set_header("Content-Type", "application/json") #not done yet
-    # req.send(payload_json)
-    # handle_request_complete(req)
-    
 
 # Function to handle the "No" button click event
 def handle_last_no_click(event):
