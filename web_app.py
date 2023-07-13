@@ -124,6 +124,7 @@ def picture_loading_only(event):
         response_data = req.text
         response_data = json.loads(response_data)
         url = response_data["data"][0]["url"]
+        # document <= url
 
         
                 
@@ -161,6 +162,7 @@ def handle_picture_popup_generate_click(event):
 # Function to handle the close button click event
 def handle_popup_no_click(event):
     document["overlay"].remove()
+
 
 # "Generate!" picture button
 picture_button_div = html.DIV(Class="NewButtonDiv", id="new_picture_button")
@@ -328,8 +330,12 @@ def handle_last_yes_click(event):
 
     payload = {
         "picture_src": url,
-        "text_content": text
+        "text_content": text.text
     }
+
+    # document<=payload["picture_src"]
+    # document <= "-------------------------------------------------------------------------"
+    # document <= payload["text_content"]
     
     # Convert the payload to a JSON string
     payload_json = json.dumps(payload)
