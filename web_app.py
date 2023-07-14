@@ -341,13 +341,24 @@ def handle_last_yes_click(event):
     payload_json = json.dumps(payload)
     
 
+    # js_code = f'''
+    # console.log("start js");
+    # window.Telegram.WebApp.sendData("{payload_json}");
+    # console.log("end.js");
+    # window.Telegram.WebApp.close();
+    # '''
+
     js_code = f'''
     console.log("start js");
-    window.Telegram.WebApp.sendData("{payload_json}");
+    window.Telegram.WebApp.sendData("{payload_json.replace('"', '\\"')}");
     console.log("end.js");
     window.Telegram.WebApp.close();
     '''
+
+    # js_code = '''console.log("start js");'''
+
     window.eval(js_code)
+
 
 
 # Function to handle the "No" button click event
