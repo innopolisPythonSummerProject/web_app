@@ -330,7 +330,7 @@ def handle_last_yes_click(event):
 
     payload = {
         "picture_src": url,
-        "text_content": text.text
+        "text_content": text if isinstance(text, str) else text.text
     }
 
     # document<=payload["picture_src"]
