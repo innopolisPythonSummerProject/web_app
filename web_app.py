@@ -333,29 +333,16 @@ def handle_last_yes_click(event):
         "text_content": text if isinstance(text, str) else text.text
     }
 
-    # document<=payload["picture_src"]
-    # document <= "-------------------------------------------------------------------------"
-    # document <= payload["text_content"]
-    
     # Convert the payload to a JSON string
     payload_json = json.dumps(payload)
     
-
-    # js_code = f'''
-    # console.log("start js");
-    # window.Telegram.WebApp.sendData("{payload_json}");
-    # console.log("end.js");
-    # window.Telegram.WebApp.close();
-    # '''
 
     js_code = f'''
     console.log("start js");
     window.Telegram.WebApp.sendData("{payload_json.replace('"', '\\"')}");
     console.log("end.js");
-    window.Telegram.WebApp.close();
     '''
 
-    # js_code = '''console.log("start js");'''
 
     window.eval(js_code)
 
