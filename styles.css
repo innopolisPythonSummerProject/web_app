@@ -50,7 +50,6 @@ body{
     aspect-ratio: 1/1;
     border-radius: 20px;
     background-color: var(--tg-theme-secondary-bg-color);
-    /* background-color: #f2f0ef; */
     overflow: hidden;
     text-align: center;
     display: flex;
@@ -72,7 +71,6 @@ body{
 .NewButton{
     background-color: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
-    /* background-color: #969E74;  */
     border: 1px;
     border-radius: 20px;
     width: 110px;
@@ -96,13 +94,10 @@ body{
 
 .NewButton:active{
     filter: brightness(80%);
-    /* background-color: #868d67;  */
 }
 
 .regeneraring_button{
     background-color: var(--tg-theme-button-color);
-    /* position: fixed; */
-    /* background-color: #969E74;  */
     border: 0px;
     border-radius: 50%;
     width: 44px;
@@ -121,7 +116,6 @@ body{
 
 .regeneraring_button:active{
     filter: brightness(80%); 
-    /* background-color: #868d67;  */
 }
 
 .regenerate-svg{
@@ -136,8 +130,6 @@ body{
 
 .regeneraring_button:disabled {
     filter: grayscale(100%);
-    /* background-color: #a0a0a0; ?????????? */
-    /* opacity: 0.9; */
     cursor: not-allowed;
 }
 
@@ -147,8 +139,6 @@ body{
 
 .regeneraring_button:disabled:active {
     filter: brightness(90%);
-    /* background-color: #a0a0a0;  */
-    /* opacity: 0.9; */
     cursor: not-allowed;
 }
 
@@ -163,7 +153,6 @@ body{
     align-items: center;
     width: 320px;
     height: 250px;
-    /* border: 1.5px solid #c9c9c9; */
 }
 
 
@@ -178,9 +167,6 @@ body{
 #send_my_wishes_button{
     background-color: var(--tg-theme-button-color);
     color: var(--tg-theme-button-text-color);
-    /* background-color: #969E74;  */
-    /* color: #ffffff; */ /* if would like to make the text white*/
-    /* font-weight: lighter; */
     border: 1px;
     border-radius: 20px;
     width: 180px;
@@ -202,8 +188,6 @@ body{
 
 #send_my_wishes_button:active{
     filter: brightness(80%);
-    /* background-color: #868d67; */
-    /* opacity: 0.85; */
 }
 
 
@@ -217,9 +201,7 @@ body{
     transform: translate(-50%, -50%);
     width: 350px;
     height: 200px;
-    /* background-color: white; */
     background-color: var(--tg-theme-bg-color);
-    /* border: 0px solid #ccc; */
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -227,7 +209,6 @@ body{
 .popup-content {
     flex-direction: column;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     height: 90%;
     font-size: 18px;
@@ -240,10 +221,7 @@ body{
 
 #popup-yes{
     color: var(--tg-theme-button-text-color);
-    /* color: #ffffff; */
-    /* font-weight: lighter; */
     background-color: var(--tg-theme-button-color);
-    /* background-color: #969E74;  */
     border: 0px;
     border-radius: 20px;
     width: 124px;
@@ -257,7 +235,6 @@ body{
 
 #popup-yes:active{
     filter: brightness(80%);
-    /* background-color: #868d67;  */
 }
 
 
@@ -271,17 +248,14 @@ body{
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box; /* Add this line */
-    /* border: 1px solid #ccc; */
 }
 
 #popup-no {
     width: 24px;
     height: 24px;
-    /* background-color: #ffffff; */
     background-color: var(--tg-theme-bg-color);
     border: 0px;
     border-radius: 50%;
-    /* border: 2px solid #a7a7a7; */
 }
 
 #popup-no:hover {
@@ -292,7 +266,6 @@ body{
     fill: var(--tg-theme-text-color);
     height: 21px;
     width: 21px;
-    /* border: 0px solid #444444; ??? */
     position: relative;
     right: 5px;
     bottom: 0px;
@@ -316,10 +289,7 @@ body{
 
 #popup-send-button{
     background-color: var(--tg-theme-button-color);
-    /* background-color: #969E74;  */
     color: var(--tg-theme-button-text-color);
-    /* color: #ffffff; */
-    /* font-weight: lighter; */
     border: 0px;
     border-radius: 20px;
     width: 80px;
@@ -335,5 +305,4 @@ body{
 
 #popup-send-button:active{
     filter: brightness(80%);
-    /* background-color: #868d67;  */
 }

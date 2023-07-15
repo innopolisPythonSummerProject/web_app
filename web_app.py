@@ -15,20 +15,17 @@ picture_title_container <= html.H3("Generate your picture:")
 main <= picture_title_container
 
 # Kittens checkbox
-
 label = html.LABEL()
 checkbox1 = html.INPUT(type="checkbox", id="KittensCheckbox")
 label_text = "Kittens"
 label <= checkbox1
 label <= label_text
 
-
 # Sparkles checkbox
 checkbox2 = html.INPUT(type="checkbox", name="myCheckbox", id="SparklesCheckbox")
 label2 = html.LABEL()
 label2 <= checkbox2
 label2 <= "Sparkles"
-
 
 
 # div for all checkboxes
@@ -90,11 +87,11 @@ def handle_picture_generate_button_click(event):
     
 def picture_loading_only(event):
 
-    def handle_image_load(payload):
+    def handle_image_load():
         
         # Make an HTTP GET request using ajax.ajax()
         req = ajax.ajax()
-        req.bind("complete", lambda req: process_response(req, payload))
+        req.bind("complete", lambda req: process_response(req))
 
 
         def handle_image_error(event):
@@ -118,15 +115,12 @@ def picture_loading_only(event):
         req.send()
         
 
-    def process_response(req, payload):
+    def process_response(req):
         global url
         
         response_data = req.text
         response_data = json.loads(response_data)
         url = response_data["data"][0]["url"]
-        # document <= url
-
-        
                 
         image = html.IMG(src=url, style={"height": "100%"})
         loading_text.remove()
@@ -140,8 +134,7 @@ def picture_loading_only(event):
     loading_text = html.SPAN("Loading...", id="loadingText", style={"opacity":"0.5"})
     container <= loading_text
     
-    payload = {"prompt":"cat"}
-    handle_image_load(payload)
+    handle_image_load()
     
 
 def overlay_off_and_picture_loading(event):
@@ -246,13 +239,11 @@ def text_loading_only(event):
         raise e
 
 
-
 def overlay_off_and_text_loading(event):
     text_loading_only(event)
 
     document["overlay"].remove()
-
-        
+ 
 # Function to handle the "Yes" button click event
 def handle_text_popup_yes_click(event):
 
@@ -322,12 +313,6 @@ def handle_last_button_click(event):
 def handle_last_yes_click(event):
     global text, url
 
-    def handle_request_complete(req):
-        # Handle the request completion
-        if req.status == 200:
-            window.close()
-    
-
     payload = {
         "picture_src": url,
         "text_content": text if isinstance(text, str) else text.text
@@ -343,10 +328,7 @@ def handle_last_yes_click(event):
     console.log("end.js");
     '''
 
-
     window.eval(js_code)
-
-
 
 # Function to handle the "No" button click event
 def handle_last_no_click(event):
@@ -359,4 +341,3 @@ submit_button.bind("click", handle_last_button_click)
 div <= submit_button
 main <= div
 document <= main
-
